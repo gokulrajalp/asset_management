@@ -1,6 +1,6 @@
 const dbConfig = {
     user: 'admin',
-    password: 'admin',
+    password: 'system',
     database: 'asset_management',
     host: 'localhost',
     port: 5432,
