@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Create User
+  body
+    h1 Create User
+    form(action='/create_user', method='post')
+      label(for='designation') designation:
+      select(name='designation' required=true)
+        option(value='admin') Admin
+        option(value='employee') Employee
+        option(value='stock_manager') Stock Manager
+      br
+      label(for='username') Username:
+      input(type='text', name='username', required=true)
+      br
+      label(for='password') Password:
+      input(type='password', name='password', required=true)
+      br
+      button(type='submit') Create User
