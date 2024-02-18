@@ -1,0 +1,19 @@
+//- views/asset_category_master.pug
+doctype html
+html
+  head
+    title Asset Category Master
+  body
+    h1 Asset Category Master
+    a(href='/asset_category/add') Add Asset Category
+    table
+      thead
+        tr
+          th Name
+          th Actions
+      tbody
+        each assetCategory in assetCategories
+          tr
+            td= assetCategory.name
+            td
+              a(href=`/asset_category/${assetCategory.id}/edit`) Edit

@@ -1,0 +1,26 @@
+//- views/add_asset.pug
+doctype html
+html
+  head
+    title Add Asset
+  body
+    h1 Add Asset
+    form(action='/asset/add', method='POST')
+      label(for='serialNumber') Serial Number:
+      input(type='text', name='serialNumber')
+
+      label(for='make') Make:
+      input(type='text', name='make')
+
+      label(for='model') Model:
+      input(type='text', name='model')
+
+      label(for='purchaseDate') Purchase Date:
+      input(type='date', name='issueDate')
+
+      label(for='assetCategoryId') Asset Category:
+      select(name='assetCategoryId')
+        each assetCategory in assetCategories
+          option(value=assetCategory.id)= assetCategory.name
+
+      button(type='submit') Add Asset

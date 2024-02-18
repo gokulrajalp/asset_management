@@ -1,0 +1,11 @@
+//- views/add_asset_category.pug
+doctype html
+html
+  head
+    title Add Asset Category
+  body
+    h1 Add Asset Category
+    form(action='/asset_category/add', method='POST')
+      label(for='name') Name:
+      input(type='text', name='name')
+      button(type='submit') Add Asset Category

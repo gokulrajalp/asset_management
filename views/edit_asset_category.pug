@@ -1,0 +1,11 @@
+//- views/edit_asset_category.pug
+doctype html
+html
+  head
+    title Edit Asset Category
+  body
+    h1 Edit Asset Category
+    form(action=`/asset_category/${assetCategory.id}/edit`, method='POST')
+      label(for='name') Name:
+      input(type='text', name='name', value=assetCategory.name)
+      button(type='submit') Save Changes

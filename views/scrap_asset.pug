@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Scrap Asset
+  form(action=`/asset/${asset.id}/scrap`, method='post')
+    label(for='scrapReason') Scrap Reason:
+    input(type='text', name='scrapReason', id='scrapReason', required=true)
+    br
+    button(type='submit') Submit

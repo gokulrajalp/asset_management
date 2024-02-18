@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Return Asset
+  form(action=`/asset/${asset.id}/return`, method='post')
+    label(for='returnDate') Return Date:
+    input(type='date', name='returnDate', id='returnDate', required=true)
+    br
+    label(for='returnReason') Return Reason:
+    input(type='text', name='returnReason', id='returnReason', required=true)
+    br
+    button(type='submit') Submit

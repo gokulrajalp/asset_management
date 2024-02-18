@@ -1,24 +1,33 @@
+// models/asset.js
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Asset extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Asset.belongsTo(models.AssetCategory, { foreignKey: 'assetCategoryId' });
+      Asset.hasMany(models.AssetHistory, { foreignKey: 'assetId' });
     }
   }
-  Asset.init({
-    serialNumber: DataTypes.STRING,
-    uniqueId: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Asset',
-  });
+
+  Asset.init(
+    {
+      serialNumber: DataTypes.STRING,
+      make: DataTypes.STRING,
+      model: DataTypes.STRING,
+      issueDate: DataTypes.DATE,
+      returnDate: DataTypes.DATE,
+      returnReason: DataTypes.STRING,
+      scrapStatus: DataTypes.STRING,
+      assetCategoryId: DataTypes.INTEGER,
+      issuedTo: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'Asset',
+    }
+  );
+
   return Asset;
 };

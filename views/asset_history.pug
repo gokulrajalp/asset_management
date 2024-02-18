@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Asset History
+  table
+    thead
+      tr
+        th Issued To
+        th Issue Date
+        th Return Date
+        th Return Reason
+    tbody
+      each history in assetHistory
+        tr
+          td= history.issuedTo
+          td= history.issuedDate
+          td= history.returnedDate
+          td= history.returnReason

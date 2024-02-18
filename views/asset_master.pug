@@ -1,0 +1,71 @@
+//- views/asset_master.pug
+doctype html
+html
+  head
+    title Asset Master
+  body
+    h1 Asset Master
+
+    //- Filter Form
+    form(action='/asset_master', method='get')
+      //- Asset Category Dropdown
+      label(for='assetCategory') Asset Category:
+      select(name='assetCategory', id='assetCategory')
+        option(value='') All
+        each category in assetCategories
+          option(value=category.id)= category.name
+
+      //- Make Search
+      label(for='make') Make:
+      input(type='text', name='make', id='make')
+
+      //- Model Search
+      label(for='model') Model:
+      input(type='text', name='model', id='model')
+
+      //- Submit Button
+      button(type='submit') Filter
+
+    //- Add Asset Button
+    a(href='/asset/add') Add Asset
+
+    //- Asset Table
+    table
+      thead
+        tr
+          th Serial Number
+          th Asset Category
+          th Make
+          th Model
+          th Issued To
+          th Issue Date
+          th Return Date
+          th Return Reason
+          th Actions
+      tbody
+        each asset in assets
+          if !asset.scrapStatus 
+            tr
+              td= asset.serialNumber
+              td= asset.AssetCategory.name
+              td= asset.make
+              td= asset.model
+              td= asset.issuedTo
+              td= asset.issueDate
+              td= asset.returnDate
+              td= asset.returnReason
+              td
+                //- Edit Asset Button
+                a(href=`/asset/${asset.id}/edit`) Edit
+
+                //- Issue Asset Button
+                a(href=`/asset/${asset.id}/issue`) Issue
+
+                //- Return Asset Button
+                a(href=`/asset/${asset.id}/return`) Return
+
+                //- Scrap Asset Button
+                a(href=`/asset/${asset.id}/scrap`) Scrap
+
+                //- Asset History Button
+                a(href=`/asset/${asset.id}/history`) History

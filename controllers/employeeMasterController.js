@@ -13,7 +13,7 @@ const employeeMasterController = {
         }
       });
   
-      res.render('employee_master-dashboard', { users });
+      res.render('employee_master', { users });
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -58,7 +58,7 @@ const employeeMasterController = {
 
       await user.save();
 
-      res.redirect('/employee_master-dashboard');
+      res.redirect('/employee_master');
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -83,7 +83,7 @@ const employeeMasterController = {
         role: 'employee'
       });
 
-      res.redirect('/employee_master-dashboard');
+      res.redirect('/employee_master');
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');

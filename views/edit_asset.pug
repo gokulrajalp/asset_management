@@ -1,0 +1,26 @@
+//- views/edit_asset.pug
+doctype html
+html
+  head
+    title Edit Asset
+  body
+    h1 Edit Asset
+    form(action=`/asset/${asset.id}/edit`, method='POST')
+      label(for='serialNumber') Serial Number:
+      input(type='text', name='serialNumber', value=asset.serialNumber)
+
+      label(for='make') Make:
+      input(type='text', name='make', value=asset.make)
+
+      label(for='model') Model:
+      input(type='text', name='model', value=asset.model)
+
+      label(for='purchaseDate') Purchase Date:
+      input(type='date', name='purchaseDate', value=asset.issueDate)
+
+      label(for='assetCategoryId') Asset Category:
+      select(name='assetCategoryId')
+        each assetCategory in assetCategories
+          option(value=assetCategory.id, selected=assetCategory.id===asset.assetCategoryId)= assetCategory.name
+
+      button(type='submit') Save Changes

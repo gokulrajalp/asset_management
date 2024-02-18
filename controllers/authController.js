@@ -17,19 +17,19 @@ const authController = {
       if (user) {
         switch (user.role) {
           case 'employee_master':
-            res.redirect('/employee_master-dashboard');
+            res.redirect('/employee_master');
             break;
           case 'asset_master':
-                res.redirect('/asset_master-dashboard');
+                res.redirect('/asset_master');
                 break;
           case 'asset_category_master':
-                  res.redirect('/asset_category_master-dashboard');
+                  res.redirect('/asset_category_master');
                   break;
           case 'asset_distributor':
-                      res.redirect('/asset_distributor-dashboard');
+                      res.redirect('/asset_distributor');
                       break;
           case 'employee':
-                res.redirect('/employee-dashboard');
+                res.redirect('/employee');
                 break;
           default:
             res.redirect('/');

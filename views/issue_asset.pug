@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Issue Asset
+  form(action=`/asset/${asset.id}/issue`, method='post')
+    label(for='issuedTo') Issue To:
+    input(type='text', name='issuedTo', id='issuedTo', required=true)
+    br
+    label(for='issueDate') Issue Date:
+    input(type='date', name='issueDate', id='issueDate', required=true)
+    br
+    button(type='submit') Submit
