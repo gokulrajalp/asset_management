@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Edit Employee
+  body
+    h1 Edit Employee - #{user.username}
+    form(action=`/employee/${user.id}/edit`, method='POST')
+      label(for='username') Username:
+      input(type='text', name='username', value=user.username)
+
+      label(for='email') Email:
+      input(type='email', name='email', value=user.email)
+
+      label(for='activityStatus') Activity Status:
+      input(type='text', name='activityStatus', value=user.activityStatus)
+
+      // Add other fields for editing
+
+      button(type='submit') Save

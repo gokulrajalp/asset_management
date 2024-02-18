@@ -1,0 +1,61 @@
+doctype html
+html
+  head
+    title Employee Master Dashboard
+    link(rel='stylesheet', href='https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css')
+  body
+    h1 Employee Master Dashboard
+
+    table#employeeTable
+      thead
+        tr
+          th User ID
+          th Name
+          th Email
+          th Activity Status
+          th Action
+
+      tbody
+        each user in users
+          tr
+            td= user.id
+            td= user.username
+            td= user.email
+            td= user.activityStatus
+            td
+              a(href=`/employee/${user.id}/edit`) Edit
+
+    a(href='/employee/add') Add
+
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+    script(src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js')
+    script.
+      $(document).ready(function() {
+        var table = $('#employeeTable').DataTable();
+
+        // Add a dropdown for filtering by activity status
+        var select = $('<select><option value="">All</option><option value="active">Active</option><option value="inactive">Inactive</option></select>')
+          .appendTo($('#employeeTable_filter'))
+          .on('change', function () {
+            var value = $(this).val();
+
+            // Use a custom search function to filter by activity status
+            $.fn.dataTable.ext.search.push(
+              function(settings, data, dataIndex) {
+                var status = data[3]; // Assuming activity status is in the 4th column (index 3)
+
+                if (value === "" || status === value) {
+                  return true;
+                }
+
+                return false;
+              }
+            );
+
+            // Redraw the table with the new filter
+            table.draw();
+
+            // Remove the custom search function after filtering
+            $.fn.dataTable.ext.search.pop();
+          });
+      });

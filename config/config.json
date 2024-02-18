@@ -9,14 +9,14 @@
   "test": {
     "username": "admin",
     "password": "system",
-    "database": "database_test",
+    "database": "asset_management",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "admin",
     "password": "system",
-    "database": "database_production",
+    "database": "asset_management",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
