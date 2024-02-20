@@ -1,12 +1,16 @@
 extends layout
 
 block content
-  h1 Return Asset
-  form(action=`/asset/${asset.id}/return`, method='post')
-    label(for='returnDate') Return Date:
-    input(type='date', name='returnDate', id='returnDate', required=true)
-    br
-    label(for='returnReason') Return Reason:
-    input(type='text', name='returnReason', id='returnReason', required=true)
-    br
-    button(type='submit') Submit
+  .container.mt-4
+    h1.text-center Return Asset
+
+    form(action=`/asset/${asset.id}/return`, method='post')
+      .mb-3
+        label(for='returnDate', class='form-label') Return Date:
+        input.form-control(type='date', name='returnDate', id='returnDate', required=true)
+
+      .mb-3
+        label(for='returnReason', class='form-label') Return Reason:
+        input.form-control(type='text', name='returnReason', id='returnReason', required=true)
+
+      button.btn.btn-primary(type='submit') Submit

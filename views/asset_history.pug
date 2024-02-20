@@ -1,18 +1,20 @@
 extends layout
 
 block content
-  h1 Asset History
-  table
-    thead
-      tr
-        th Issued To
-        th Issue Date
-        th Return Date
-        th Return Reason
-    tbody
-      each history in assetHistory
+  .container.mt-4
+    h1.text-center Asset History
+
+    table.table.table-bordered
+      thead
         tr
-          td= history.issuedTo
-          td= history.issuedDate
-          td= history.returnedDate
-          td= history.returnReason
+          th Issued To
+          th Issue Date
+          th Return Date
+          th Return Reason
+      tbody
+        each history in assetHistory
+          tr
+            td= history.issuedTo
+            td= history.issuedDate
+            td= history.returnedDate
+            td= history.returnReason

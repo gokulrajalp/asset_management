@@ -1,12 +1,11 @@
-//- views/asset_category_master.pug
-doctype html
-html
-  head
-    title Asset Category Master
-  body
-    h1 Asset Category Master
-    a(href='/asset_category/add') Add Asset Category
-    table
+extends layout
+
+block content
+  div.container.mt-5
+    h1.text-center Asset Category Master
+    a.btn.btn-primary.mb-3(href='/asset_category/add') Add Asset Category
+
+    table.table.table-bordered
       thead
         tr
           th Name
@@ -16,4 +15,4 @@ html
           tr
             td= assetCategory.name
             td
-              a(href=`/asset_category/${assetCategory.id}/edit`) Edit
+              a.btn.btn-warning(href=`/asset_category/${assetCategory.id}/edit`) Edit

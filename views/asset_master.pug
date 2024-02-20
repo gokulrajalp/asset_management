@@ -1,36 +1,31 @@
-//- views/asset_master.pug
-doctype html
-html
-  head
-    title Asset Master
-  body
-    h1 Asset Master
+extends layout
 
-    //- Filter Form
+block content
+  .container.mt-4
+    h1.text-center Asset Master
+
     form(action='/asset_master', method='get')
-      //- Asset Category Dropdown
-      label(for='assetCategory') Asset Category:
-      select(name='assetCategory', id='assetCategory')
-        option(value='') All
-        each category in assetCategories
-          option(value=category.id)= category.name
+      .row.mb-3
+        .col-md-4
+          label(for='assetCategory', class='form-label') Asset Category:
+          select.form-select(name='assetCategory', id='assetCategory')
+            option(value='') All
+            each category in assetCategories
+              option(value=category.id)= category.name
 
-      //- Make Search
-      label(for='make') Make:
-      input(type='text', name='make', id='make')
+        .col-md-4
+          label(for='make', class='form-label') Make:
+          input.form-control(type='text', name='make', id='make')
 
-      //- Model Search
-      label(for='model') Model:
-      input(type='text', name='model', id='model')
+        .col-md-4
+          label(for='model', class='form-label') Model:
+          input.form-control(type='text', name='model', id='model')
 
-      //- Submit Button
-      button(type='submit') Filter
+      button.btn.btn-primary(type='submit') Filter
 
-    //- Add Asset Button
-    a(href='/asset/add') Add Asset
+    a.btn.btn-success(href='/asset/add') Add Asset
 
-    //- Asset Table
-    table
+    table.table.table-bordered.table-hover.table-responsive-md
       thead
         tr
           th Serial Number
@@ -55,17 +50,12 @@ html
               td= asset.returnDate
               td= asset.returnReason
               td
-                //- Edit Asset Button
-                a(href=`/asset/${asset.id}/edit`) Edit
+                a.btn.btn-warning.btn-sm(href=`/asset/${asset.id}/edit`) Edit
 
-                //- Issue Asset Button
-                a(href=`/asset/${asset.id}/issue`) Issue
+                a.btn.btn-info.btn-sm(href=`/asset/${asset.id}/issue`) Issue
 
-                //- Return Asset Button
-                a(href=`/asset/${asset.id}/return`) Return
+                a.btn.btn-secondary.btn-sm(href=`/asset/${asset.id}/return`) Return
 
-                //- Scrap Asset Button
-                a(href=`/asset/${asset.id}/scrap`) Scrap
+                a.btn.btn-danger.btn-sm(href=`/asset/${asset.id}/scrap`) Scrap
 
-                //- Asset History Button
-                a(href=`/asset/${asset.id}/history`) History
+                a.btn.btn-primary.btn-sm(href=`/asset/${asset.id}/history`) History

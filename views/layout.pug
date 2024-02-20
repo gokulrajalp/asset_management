@@ -1,10 +1,18 @@
-//- views/layout.pug
 html
   head
     title Asset Management System
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    style
+      include ../Bootstrap/css/bootstrap.min.css
+      include ../Bootstrap/css/custom.css
+    script
+      include ../Bootstrap/js/bootstrap.bundle.min.js
   body
     header
-      h1 Asset Management System
+      div.top-right-corner
+        form(action='/logout', method='get')
+          button.btn.btn-danger(type='submit') Logout
+
     block content
- 
+
+    footer.fixed-bottom.fixed-end.text-right.small
+      h5.mb-0 Asset Management System

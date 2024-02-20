@@ -1,4 +1,3 @@
-// Example: seeders/20240217110553-demo-emails.js
 'use strict';
 
 module.exports = {
@@ -18,7 +17,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    // Delete all records in the Users table
     return queryInterface.bulkDelete('Users', null, {});
   }
 };

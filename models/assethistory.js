@@ -1,4 +1,3 @@
-// models/assetHistory.js
 
 'use strict';
 const { Model } = require('sequelize');

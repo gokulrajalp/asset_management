@@ -1,16 +1,26 @@
-// views/login.jade
 html
   head
-    title Login
+    title Asset Management System
+    style
+      include ../Bootstrap/css/bootstrap.min.css
+      include ../Bootstrap/css/custom.css
+    script
+      include ../Bootstrap/js/bootstrap.bundle.min.js
   body
-    h1 Login
-    if error
-      p.error= error
-    form(action="/login", method="post")
-      label(for="username") Username:
-      input(type="text", name="username", required)
-      br
-      label(for="password") Password:
-      input(type="password", name="password", required)
-      br
-      button(type="submit") Login
+  header
+    div.container-fluid.d-flex.justify-content-center.align-items-center.min-vh-100
+      .card.glassmorphism-effect
+        .card-body
+          h1.card-title.text-center Login
+          form(action='/login', method='post')
+            .mb-3
+              label(for='username') Username:
+              input(type='text', name='username', id='username', class='form-control', required=true)
+            .mb-3
+              label(for='password') Password:
+              input(type='password', name='password', id='password', class='form-control', required=true)
+            button.btn.btn-primary(type='submit') Login
+
+  footer.fixed-bottom.fixed-end.text-right.small
+    h5.mb-0 Asset Management System
+

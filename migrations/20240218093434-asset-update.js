@@ -1,4 +1,3 @@
-// migrations/xxxxxx-add-return-reason-scrap-status-to-assets.js
 'use strict';
 
 module.exports = {

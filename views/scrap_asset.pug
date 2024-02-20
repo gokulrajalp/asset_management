@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  h1 Scrap Asset
-  form(action=`/asset/${asset.id}/scrap`, method='post')
-    label(for='scrapReason') Scrap Reason:
-    input(type='text', name='scrapReason', id='scrapReason', required=true)
-    br
-    button(type='submit') Submit
+  .container.mt-4
+    h1.text-center Scrap Asset
+
+    form(action=`/asset/${asset.id}/scrap`, method='post')
+      .mb-3
+        label(for='scrapReason', class='form-label') Scrap Reason:
+        input.form-control(type='text', name='scrapReason', id='scrapReason', required=true)
+
+      button.btn.btn-danger(type='submit') Submit

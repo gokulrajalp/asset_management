@@ -1,4 +1,3 @@
-// controllers/employeeController.js
 
 
 const { User } = require('../models');
@@ -43,7 +42,6 @@ const employeeMasterController = {
       const userId = req.params.id;
       const { username, email, activityStatus } = req.body;
 
-      // Validate input if needed
 
       const user = await User.findByPk(userId);
 
@@ -51,7 +49,6 @@ const employeeMasterController = {
         return res.status(404).send('User not found');
       }
 
-      // Update user details
       user.username = username;
       user.email = email;
       user.activityStatus = activityStatus;
@@ -73,9 +70,7 @@ const employeeMasterController = {
     try {
       const { username, email, activityStatus } = req.body;
 
-      // Validate input if needed
 
-      // Create a new user
       const newUser = await User.create({
         username,
         email,
@@ -91,7 +86,6 @@ const employeeMasterController = {
   }
 
 
-  // Additional employee dashboard-related functions if needed
 };
 
 

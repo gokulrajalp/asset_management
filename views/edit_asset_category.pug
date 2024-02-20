@@ -1,11 +1,10 @@
-//- views/edit_asset_category.pug
-doctype html
-html
-  head
-    title Edit Asset Category
-  body
-    h1 Edit Asset Category
+extends layout
+
+block content
+  div.container.mt-5
+    h1.text-center Edit Asset Category
     form(action=`/asset_category/${assetCategory.id}/edit`, method='POST')
-      label(for='name') Name:
-      input(type='text', name='name', value=assetCategory.name)
-      button(type='submit') Save Changes
+      div.form-group
+        label(for='name') Name:
+        input.form-control(type='text', name='name', value=assetCategory.name, required=true)
+      button.btn.btn-primary(type='submit') Save Changes

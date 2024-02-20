@@ -1,12 +1,16 @@
 extends layout
 
 block content
-  h1 Issue Asset
-  form(action=`/asset/${asset.id}/issue`, method='post')
-    label(for='issuedTo') Issue To:
-    input(type='text', name='issuedTo', id='issuedTo', required=true)
-    br
-    label(for='issueDate') Issue Date:
-    input(type='date', name='issueDate', id='issueDate', required=true)
-    br
-    button(type='submit') Submit
+  .container.mt-4
+    h1.text-center Issue Asset
+
+    form(action=`/asset/${asset.id}/issue`, method='post')
+      .mb-3
+        label(for='issuedTo', class='form-label') Issue To:
+        input.form-control(type='text', name='issuedTo', id='issuedTo', required=true)
+
+      .mb-3
+        label(for='issueDate', class='form-label') Issue Date:
+        input.form-control(type='date', name='issueDate', id='issueDate', required=true)
+
+      button.btn.btn-primary(type='submit') Submit

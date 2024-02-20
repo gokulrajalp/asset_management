@@ -1,19 +1,22 @@
-doctype html
-html
-  head
-    title Add Employee
-  body
-    h1 Add Employee
-    form(action='/employee/add', method='POST')
-      label(for='username') Username:
-      input(type='text', name='username')
+extends layout
 
-      label(for='email') Email:
-      input(type='email', name='email')
+block content
+    .container.mt-5
+        h1 Add Employee
 
-      label(for='activityStatus') Activity Status:
-      input(type='text', name='activityStatus')
+        form(action='/employee/add', method='POST')
+            .mb-3
+                label(for='username', class='form-label') Username:
+                input(type='text', name='username', class='form-control', required=true)
 
-      // Add other fields for adding
+            .mb-3
+                label(for='email', class='form-label') Email:
+                input(type='email', name='email', class='form-control', required=true)
 
-      button(type='submit') Add Employee
+            .mb-3
+                label(for='activityStatus', class='form-label') Activity Status:
+                input(type='text', name='activityStatus', class='form-control', required=true)
+
+
+            .mt-3
+                button.btn.btn-primary(type='submit') Add Employee

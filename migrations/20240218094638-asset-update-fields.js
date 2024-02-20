@@ -1,4 +1,3 @@
-// migrations/xxxxxx-update-asset-model.js
 'use strict';
 
 module.exports = {

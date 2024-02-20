@@ -1,8 +1,6 @@
-doctype html
-html
-  head
-    title Create User
-  body
+extends layout
+
+block content
     h1 Create User
     form(action='/create_user', method='post')
       label(for='designation') designation:

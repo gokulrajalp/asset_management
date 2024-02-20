@@ -1,4 +1,3 @@
-// controllers/assetMasterController.js
 const { Asset, AssetCategory,AssetHistory, Sequelize } = require('../models');
 const { Op } = Sequelize;
 const assetMasterController = {
@@ -6,10 +5,8 @@ const assetMasterController = {
     try {
       const assetCategories = await AssetCategory.findAll();
 
-      // Get filter and search parameters from the request query
       const { assetCategory, make, model } = req.query;
 
-      // Build the where clause based on filter and search parameters
       const whereClause = {};
       if (assetCategory) {
         whereClause.assetCategoryId = assetCategory;
@@ -23,7 +20,6 @@ const assetMasterController = {
         whereClause.model = { [Op.like]: `%${model}%` };
       }
 
-      // Fetch assets based on filter and search parameters
       const assets = await Asset.findAll({
         where: whereClause,
         include: [{ model: AssetCategory }],
@@ -67,7 +63,7 @@ const assetMasterController = {
     try {
       const assetId = req.params.id;
       const asset = await Asset.findByPk(assetId, {
-        include: AssetCategory, // Include the AssetCategory information
+        include: AssetCategory, 
       });
       const assetCategories = await AssetCategory.findAll();
       res.render('edit_asset', { asset, assetCategories });
@@ -82,10 +78,8 @@ const assetMasterController = {
       const { id } = req.params;
       const { model, purchaseDate, assetCategoryId } = req.body;
 
-      // Ensure issueDate is a valid JavaScript Date object
       const parsedIssueDate = new Date(purchaseDate);
 
-      // Update the asset with the parsed issueDate
       await Asset.update(
         { model, purchaseDate: parsedIssueDate, assetCategoryId },
         { where: { id } }
@@ -102,7 +96,7 @@ const assetMasterController = {
     try {
       const assetId = req.params.id;
       const asset = await Asset.findByPk(assetId, {
-        include: AssetCategory, // Include the AssetCategory information
+        include: AssetCategory, 
       });
       const assetCategories = await AssetCategory.findAll();
       res.render('issue_asset', { asset, assetCategories });
@@ -117,15 +111,12 @@ const assetMasterController = {
       const { id } = req.params;
       const { issuedTo, issueDate } = req.body;
   
-      // Find the asset by ID
       const asset = await Asset.findByPk(id);
   
-      // Check if the asset is found
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
   
-      // Update the asset with issue information
       await asset.update({
         issuedTo,
         issueDate,
@@ -133,7 +124,6 @@ const assetMasterController = {
         returnReason:null,
       });
   
-      // Save the issue information to AssetHistory
       await AssetHistory.create({
         assetId: id,
         issuedTo: issuedTo,
@@ -169,26 +159,21 @@ const assetMasterController = {
       const { id } = req.params;
       const { returnDate, returnReason } = req.body;
   
-      // Find the asset by ID
       const asset = await Asset.findByPk(id);
   
-      // Check if the asset is found
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
   
-      // Ensure that the 'issuedTo' property is available
       const issuedTo = asset.issuedTo || '';
   
-      // Update the asset with return information
       await asset.update({
         returnDate,
         returnReason,
         issuedTo: null, 
-        issueDate: null, // Clear the 'issuedTo' field after returning the asset
+        issueDate: null, 
       });
   
-      // Save the return information to AssetHistory
       await AssetHistory.create({
         assetId: id,
         issuedTo: issuedTo,
@@ -209,7 +194,6 @@ const assetMasterController = {
       const assetId = req.params.id;
       const asset = await Asset.findByPk(assetId);
   
-      // Check if the asset is found
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
@@ -226,17 +210,14 @@ const assetMasterController = {
       const { id } = req.params;
       const { scrapReason } = req.body;
   
-      // Find the asset by ID
       const asset = await Asset.findByPk(id);
   
-      // Check if the asset is found
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
   
-      // Update the asset with scrap information
       await asset.update({
-        scrapStatus: scrapReason, // Update the status to indicate it's scrapped
+        scrapStatus: scrapReason, 
       });
   
       res.redirect('/asset_master');
@@ -251,17 +232,14 @@ const assetMasterController = {
     try {
       const assetId = req.params.id;
   
-      // Fetch the asset with its history
       const asset = await Asset.findByPk(assetId, {
         include: [{ model: AssetHistory }],
       });
   
-      // Check if the asset is found
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
   
-      // Render the view with the asset's history
       res.render('asset_history', { assetHistory: asset.AssetHistories });
     } catch (err) {
       console.error(err);

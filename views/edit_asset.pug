@@ -1,26 +1,30 @@
-//- views/edit_asset.pug
-doctype html
-html
-  head
-    title Edit Asset
-  body
-    h1 Edit Asset
+extends layout
+
+block content
+  .container.mt-4
+    h1.text-center Edit Asset
+
     form(action=`/asset/${asset.id}/edit`, method='POST')
-      label(for='serialNumber') Serial Number:
-      input(type='text', name='serialNumber', value=asset.serialNumber)
+      .mb-3
+        label(for='serialNumber', class='form-label') Serial Number:
+        input.form-control(type='text', name='serialNumber', value=asset.serialNumber)
 
-      label(for='make') Make:
-      input(type='text', name='make', value=asset.make)
+      .mb-3
+        label(for='make', class='form-label') Make:
+        input.form-control(type='text', name='make', value=asset.make)
 
-      label(for='model') Model:
-      input(type='text', name='model', value=asset.model)
+      .mb-3
+        label(for='model', class='form-label') Model:
+        input.form-control(type='text', name='model', value=asset.model)
 
-      label(for='purchaseDate') Purchase Date:
-      input(type='date', name='purchaseDate', value=asset.issueDate)
+      .mb-3
+        label(for='purchaseDate', class='form-label') Purchase Date:
+        input.form-control(type='date', name='purchaseDate', value=asset.issueDate)
 
-      label(for='assetCategoryId') Asset Category:
-      select(name='assetCategoryId')
-        each assetCategory in assetCategories
-          option(value=assetCategory.id, selected=assetCategory.id===asset.assetCategoryId)= assetCategory.name
+      .mb-3
+        label(for='assetCategoryId', class='form-label') Asset Category:
+        select.form-select(name='assetCategoryId')
+          each assetCategory in assetCategories
+            option(value=assetCategory.id, selected=assetCategory.id===asset.assetCategoryId)= assetCategory.name
 
-      button(type='submit') Save Changes
+      button.btn.btn-primary(type='submit') Save Changes

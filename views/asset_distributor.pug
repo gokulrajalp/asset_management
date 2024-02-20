@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  .container.mt-4
+    h1.text-center Asset Distributor
+
+    form(action='/asset_master', method='get')
+      .row.g-3
+        .col-md-4
+          label(for='assetCategory') Asset Category:
+          select.form-select(name='assetCategory', id='assetCategory')
+            option(value='') All
+            each category in assetCategories
+              option(value=category.id)= category.name
+        .col-md-4
+          label(for='make') Make:
+          input.form-control(type='text', name='make', id='make')
+        .col-md-4
+          label(for='model') Model:
+          input.form-control(type='text', name='model', id='model')
+
+      button.btn.btn-primary(type='submit') Filter
+
+    table.table.table-bordered.table-hover.mt-3
+      thead
+        tr
+          th Serial Number
+          th Asset Category
+          th Make
+          th Model
+          th Issued To
+          th Issue Date
+          th Return Date
+          th Return Reason
+          th Actions
+      tbody
+        each asset in assets
+          if !asset.scrapStatus 
+            tr
+              td= asset.serialNumber
+              td= asset.AssetCategory.name
+              td= asset.make
+              td= asset.model
+              td= asset.issuedTo
+              td= asset.issueDate
+              td= asset.returnDate
+              td= asset.returnReason
+              td
+                a.btn.btn-success(href=`/asset/${asset.id}/issue`) Issue
+                a.btn.btn-warning(href=`/asset/${asset.id}/return`) Return
+                a.btn.btn-danger(href=`/asset/${asset.id}/scrap`) Scrap
+                a.btn.btn-info(href=`/asset/${asset.id}/history`) History

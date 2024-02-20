@@ -1,26 +1,31 @@
-//- views/add_asset.pug
-doctype html
-html
-  head
-    title Add Asset
-  body
-    h1 Add Asset
-    form(action='/asset/add', method='POST')
-      label(for='serialNumber') Serial Number:
-      input(type='text', name='serialNumber')
+extends layout
 
-      label(for='make') Make:
-      input(type='text', name='make')
+block content
+    .container.mt-5
+        h1 Add Asset
 
-      label(for='model') Model:
-      input(type='text', name='model')
+        form(action='/asset/add', method='POST')
+            .mb-3
+                label(for='serialNumber', class='form-label') Serial Number:
+                input(type='text', name='serialNumber', class='form-control', required=true)
 
-      label(for='purchaseDate') Purchase Date:
-      input(type='date', name='issueDate')
+            .mb-3
+                label(for='make', class='form-label') Make:
+                input(type='text', name='make', class='form-control', required=true)
 
-      label(for='assetCategoryId') Asset Category:
-      select(name='assetCategoryId')
-        each assetCategory in assetCategories
-          option(value=assetCategory.id)= assetCategory.name
+            .mb-3
+                label(for='model', class='form-label') Model:
+                input(type='text', name='model', class='form-control', required=true)
 
-      button(type='submit') Add Asset
+            .mb-3
+                label(for='purchaseDate', class='form-label') Purchase Date:
+                input(type='date', name='issueDate', class='form-control', required=true)
+
+            .mb-3
+                label(for='assetCategoryId', class='form-label') Asset Category:
+                select(name='assetCategoryId', class='form-select')
+                    each assetCategory in assetCategories
+                        option(value=assetCategory.id)= assetCategory.name
+
+            .mt-3
+                button.btn.btn-primary(type='submit') Add Asset

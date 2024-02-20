@@ -1,19 +1,22 @@
-doctype html
-html
-  head
-    title Edit Employee
-  body
-    h1 Edit Employee - #{user.username}
-    form(action=`/employee/${user.id}/edit`, method='POST')
-      label(for='username') Username:
-      input(type='text', name='username', value=user.username)
+extends layout
 
-      label(for='email') Email:
-      input(type='email', name='email', value=user.email)
+block content
+    .container.mt-5
+        h1 Edit Employee - #{user.username}
 
-      label(for='activityStatus') Activity Status:
-      input(type='text', name='activityStatus', value=user.activityStatus)
+        form(action=`/employee/${user.id}/edit`, method='POST')
+            .mb-3
+                label(for='username', class='form-label') Username:
+                input(type='text', name='username', value=user.username, class='form-control', required=true)
 
-      // Add other fields for editing
+            .mb-3
+                label(for='email', class='form-label') Email:
+                input(type='email', name='email', value=user.email, class='form-control', required=true)
 
-      button(type='submit') Save
+            .mb-3
+                label(for='activityStatus', class='form-label') Activity Status:
+                input(type='text', name='activityStatus', value=user.activityStatus, class='form-control', required=true)
+
+
+            .mt-3
+                button.btn.btn-primary(type='submit') Save

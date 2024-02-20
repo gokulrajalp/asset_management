@@ -1,11 +1,10 @@
-//- views/add_asset_category.pug
-doctype html
-html
-  head
-    title Add Asset Category
-  body
-    h1 Add Asset Category
+extends layout
+
+block content
+  div.container.mt-5
+    h1.text-center Add Asset Category
     form(action='/asset_category/add', method='POST')
-      label(for='name') Name:
-      input(type='text', name='name')
-      button(type='submit') Add Asset Category
+      div.form-group
+        label(for='name') Name:
+        input.form-control(type='text', name='name', required=true)
+      button.btn.btn-primary(type='submit') Add Asset Category

@@ -1,39 +1,33 @@
-// routes/employee.js
 const express = require('express');
 const router = express.Router();
 const assetMasterController = require('../controllers/assetMasterController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/asset_master', assetMasterController.renderAssetMasterDashboard);
-
-
-router.get('/asset/add', assetMasterController.renderAddAsset);
-
-// Handle Add Asset Form Submission
-router.post('/asset/add', assetMasterController.handleAddAsset);
-
-// Render Edit Asset Form
-router.get('/asset/:id/edit', assetMasterController.renderEditAsset);
-
-// Handle Edit Asset Form Submission
-router.post('/asset/:id/edit', assetMasterController.handleEditAsset);
+router.get('/asset_master', authMiddleware, assetMasterController.renderAssetMasterDashboard);
 
 
-router.get('/asset/:id/issue', assetMasterController.renderIssueAsset);
-router.post('/asset/:id/issue', assetMasterController.handleIssueAsset);
+router.get('/asset/add', authMiddleware, assetMasterController.renderAddAsset);
+
+router.post('/asset/add', authMiddleware, assetMasterController.handleAddAsset);
+
+router.get('/asset/:id/edit', authMiddleware, assetMasterController.renderEditAsset);
+
+router.post('/asset/:id/edit', authMiddleware, assetMasterController.handleEditAsset);
 
 
-router.post('/asset/:id/return', assetMasterController.handleReturnAsset);
-router.get('/asset/:id/return', assetMasterController.renderReturnAsset);
+router.get('/asset/:id/issue', authMiddleware, assetMasterController.renderIssueAsset);
+router.post('/asset/:id/issue', authMiddleware, assetMasterController.handleIssueAsset);
 
 
-// Render Scrap Asset Form
-router.get('/asset/:id/scrap', assetMasterController.renderScrapAsset);
+router.post('/asset/:id/return', authMiddleware, assetMasterController.handleReturnAsset);
+router.get('/asset/:id/return', authMiddleware, assetMasterController.renderReturnAsset);
 
-// Handle Scrap Asset Form Submission
-router.post('/asset/:id/scrap', assetMasterController.handleScrapAsset);
+router.get('/asset/:id/scrap', authMiddleware, assetMasterController.renderScrapAsset);
+
+router.post('/asset/:id/scrap', authMiddleware, assetMasterController.handleScrapAsset);
 
 
-router.get('/asset/:id/history', assetMasterController.renderAssetHistory);
+router.get('/asset/:id/history', authMiddleware, assetMasterController.renderAssetHistory);
 
 
 module.exports = router;

@@ -1,61 +1,59 @@
-doctype html
-html
-  head
-    title Employee Master Dashboard
-    link(rel='stylesheet', href='https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css')
-  body
-    h1 Employee Master Dashboard
+extends layout
 
-    table#employeeTable
-      thead
-        tr
-          th User ID
-          th Name
-          th Email
-          th Activity Status
-          th Action
+block content
+    .container.mt-5
+        h1.text-center Employee Master Dashboard
 
-      tbody
-        each user in users
-          tr
-            td= user.id
-            td= user.username
-            td= user.email
-            td= user.activityStatus
-            td
-              a(href=`/employee/${user.id}/edit`) Edit
+        table#employeeTable.table.table-bordered.table-hover.mt-3.mx-auto
+            thead
+                tr
+                    th User ID
+                    th Name
+                    th Email
+                    th Activity Status
+                    th Action
 
-    a(href='/employee/add') Add
+            tbody
+                each user in users
+                    tr
+                        td= user.id
+                        td= user.username
+                        td= user.email
+                        td= user.activityStatus
+                        td
+                            a.btn.btn-primary(href=`/employee/${user.id}/edit`) Edit
 
-    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-    script(src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js')
-    script.
-      $(document).ready(function() {
-        var table = $('#employeeTable').DataTable();
+        a.btn.btn-success(href='/employee/add') Add
 
-        // Add a dropdown for filtering by activity status
-        var select = $('<select><option value="">All</option><option value="active">Active</option><option value="inactive">Inactive</option></select>')
-          .appendTo($('#employeeTable_filter'))
-          .on('change', function () {
-            var value = $(this).val();
+        script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+        script(src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js')
+        script.
+            $(document).ready(function() {
+                var table = $('#employeeTable').DataTable();
 
-            // Use a custom search function to filter by activity status
-            $.fn.dataTable.ext.search.push(
-              function(settings, data, dataIndex) {
-                var status = data[3]; // Assuming activity status is in the 4th column (index 3)
+                var select = $('<select class="form-select"><option value="">All</option><option value="active">Active</option><option value="inactive">Inactive</option></select>')
+                    .appendTo($('#employeeTable_filter'))
+                    .on('change', function () {
+                        var value = $(this).val();
 
-                if (value === "" || status === value) {
-                  return true;
-                }
+                        $.fn.dataTable.ext.search.push(
+                            function(settings, data, dataIndex) {
+                                var status = data[3]; 
 
-                return false;
-              }
-            );
+                                if (value === "" || status === value) {
+                                    return true;
+                                }
 
-            // Redraw the table with the new filter
-            table.draw();
+                                return false;
+                            }
+                        );
 
-            // Remove the custom search function after filtering
-            $.fn.dataTable.ext.search.pop();
-          });
-      });
+                        table.draw();
+
+                        $.fn.dataTable.ext.search.pop();
+                    });
+
+                $('#employeeTable_paginate').addClass('d-flex justify-content-end');
+                $('#employeeTable_previous').addClass('btn btn-primary');
+                $('#employeeTable_next').addClass('btn btn-primary');
+            });
