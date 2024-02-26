@@ -3,6 +3,13 @@ const router = express.Router();
 const employeeController = require('../controllers/employeeController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/employee', authMiddleware, employeeController.renderEmployeeDashboard);
+const setRoleMiddleware = (req, res, next) => {
+    req.role = 'employee'; 
+    console.log('Role set:', req.role);
+    next();
+  };
+
+
+router.get('/employee', setRoleMiddleware, authMiddleware, employeeController.renderEmployeeDashboard);
 
 module.exports = router;

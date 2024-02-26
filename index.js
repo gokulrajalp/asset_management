@@ -11,14 +11,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'pug'); 
 
-app.use((req, res, next) => {
-  if (req.path === '/login') {
-    return next(); 
-  }
-  authMiddleware(req, res, next);
-});
+
+
 
 app.use('/', routes);
+
+app.use((req, res) => {
+  res.status(404).redirect('/login');
+});
+
+
+
 
 const PORT = process.env.PORT || 3000;
 

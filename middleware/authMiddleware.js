@@ -17,7 +17,15 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).redirect('/login'); 
     }
 
+ if(user.role != req.role){
+      return res.status(401).redirect('/login');
+    }
+
     req.user = user; 
+
+
+
+
     next();
   } catch (error) {
     console.error(error);

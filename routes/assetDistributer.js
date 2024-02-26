@@ -3,6 +3,14 @@ const router = express.Router();
 const assetDistributorController = require('../controllers/assetDistributorController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/asset_distributor', authMiddleware, assetDistributorController.renderassetDistributorDashboard);
+
+const setRoleMiddleware = (req, res, next) => {
+    req.role = 'asset_distributor'; 
+    next();
+  };
+
+
+
+router.get('/asset_distributor',setRoleMiddleware, authMiddleware, assetDistributorController.renderassetDistributorDashboard);
 
 module.exports = router;
