@@ -30,4 +30,16 @@ body {
     background: linear-gradient(135deg, rgba(240, 147, 199, 1), rgba(192, 77, 184, 1));
   }
   
-  
+  a {
+    text-decoration: none;
+}
+.login-page {
+    width: 100%;
+    height: 100vh;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+}
+.form-right i {
+    font-size: 100px;
+}

@@ -5,6 +5,7 @@ const authController = require('../controllers/authController');
 router.get('/login', authController.renderLogin);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
+router.get('/dashboard', authController.renderdashboard);
 router.get('/', (req, res) => {
     return res.redirect('/login');
 });

@@ -6,21 +6,43 @@ html
       include ../Bootstrap/css/custom.css
     script
       include ../Bootstrap/js/bootstrap.bundle.min.js
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css")
   body
-  header
-    div.container-fluid.d-flex.justify-content-center.align-items-center.min-vh-100
-      .card.glassmorphism-effect
-        .card-body
-          h1.card-title.text-center Login
-          form(action='/login', method='post')
-            .mb-3
-              label(for='username') Username:
-              input(type='text', name='username', id='username', class='form-control', required=true)
-            .mb-3
-              label(for='password') Password:
-              input(type='password', name='password', id='password', class='form-control', required=true)
-            button.btn.btn-primary(type='submit') Login
-
-  footer.fixed-bottom.fixed-end.text-right.small
-    h5.mb-0 Asset Management System
+    .login-page.bg-light
+      .container
+        .row
+          .col-lg-10.offset-lg-1
+            .bg-white.shadow.rounded
+              .row
+                .col-md-7.pe-0
+                  .form-left.h-100.py-5.px-5
+                    form(action="/login", method="post", class="row g-4")
+                      .col-12
+                        .input-group.mb-3
+                          span.input-group-text @
+                          .form-floating
+                            input#floatingInputGroup1.form-control(type='text' name='username' placeholder='Username')
+                            label(for='username') Username
+                      .col-12
+                        .input-group.mb-3
+                          span.input-group-text  ** 
+                          .form-floating
+                            input#floatingInputGroup1.form-control(type='password' name='password' placeholder='Password')
+                            label(for='password') Password
+                      .col-sm-6
+                        .form-check
+                          input.form-check-input(type="checkbox", id="inlineFormCheck")
+                          label.form-check-label(for="inlineFormCheck") Remember me
+                      .col-sm-6
+                        a.float-end.text-primary(href="#") Forgot Password?
+                      .col-12
+                        button.btn.btn-primary.px-4.float-end.mt-4(type="submit") Login
+                .col-md-5.ps-0.d-none.d-md-block
+                  .form-right.h-100.bg-primary.text-white.text-center.pt-5
+                    i.bi.bi-bootstrap
+                    h2.fs-1 Welcome Back!!!
+                    br
+                    br
+                    h1.fs-2.text-dark Asset
+                    h1.fs-3.text-dark Management System
 

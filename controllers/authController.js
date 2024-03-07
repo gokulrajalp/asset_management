@@ -7,6 +7,14 @@ const authController = {
     res.render('login', { error: null });
   },
 
+
+
+  renderdashboard: (req, res) => {
+    res.render('dashboard');
+  },
+
+
+
   login: async (req, res) => {
     const { username, password } = req.body;
   
@@ -23,6 +31,9 @@ const authController = {
         res.cookie('token', token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 }); 
   
         switch (user.role) {
+          case 'admin':
+            res.redirect('/dashboard');
+            break;
           case 'employee_master':
             res.redirect('/employee_master');
             break;

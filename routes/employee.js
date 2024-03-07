@@ -5,7 +5,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 const setRoleMiddleware = (req, res, next) => {
     req.role = 'employee'; 
-    console.log('Role set:', req.role);
     next();
   };
 

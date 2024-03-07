@@ -75,6 +75,7 @@ const employeeMasterController = {
         username,
         email,
         activityStatus,
+        password:'admin@123',
         role: 'employee'
       });
 

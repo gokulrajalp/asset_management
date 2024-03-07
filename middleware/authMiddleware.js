@@ -17,16 +17,19 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).redirect('/login'); 
     }
 
- if(user.role != req.role){
+ if(user.role == req.role || user.role == "admin"){
+     req.user = user; 
+     next();
+    } else {
       return res.status(401).redirect('/login');
     }
 
-    req.user = user; 
+    
+
+  
 
 
-
-
-    next();
+   
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

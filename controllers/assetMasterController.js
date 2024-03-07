@@ -1,9 +1,12 @@
-const { Asset, AssetCategory,AssetHistory, Sequelize } = require('../models');
+const { Asset, AssetCategory,AssetHistory, Sequelize, User } = require('../models');
 const { Op } = Sequelize;
 const assetMasterController = {
   renderAssetMasterDashboard: async (req, res) => {
     try {
       const assetCategories = await AssetCategory.findAll();
+      
+      const assetHistory = await AssetHistory.findAll();
+      
 
       const { assetCategory, make, model } = req.query;
 
@@ -25,7 +28,7 @@ const assetMasterController = {
         include: [{ model: AssetCategory }],
       });
 
-      res.render('asset_master', { assets, assetCategories });
+      res.render('asset_master', { assets, assetCategories, assetHistory });
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -116,21 +119,38 @@ const assetMasterController = {
       if (!asset) {
         return res.status(404).send('Asset not found');
       }
+
+
+
+  const user = await User.findOne({
+    where : {username : issuedTo}
+  });
+
+ 
   
-      await asset.update({
+  if(user){
+    await asset.update({
         issuedTo,
         issueDate,
         returnDate:null,
         returnReason:null,
       });
-  
+
       await AssetHistory.create({
         assetId: id,
         issuedTo: issuedTo,
         issuedDate: issueDate,
       });
-  
+
       res.redirect('/asset_master');
+  }
+
+
+      
+  
+      
+  
+     
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');

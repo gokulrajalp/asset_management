@@ -5,11 +5,11 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       
       {
-        username: 'employee2',
-        email: 'employee2@kttelematic.com',
+        username: 'admin',
+        email: 'admin@kttelematic.com',
         password: 'admin@123',
-        role: 'employee',
-        activityStatus: 'inactive',
+        role: 'admin',
+        activityStatus: 'active',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -1,0 +1,60 @@
+extends dashboard_layout
+
+block content
+      .container-fluid.px-4
+        h1.mt-4 Dashboard
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Employee Details
+        .row
+          .col-xl-3.col-md-6
+            .card.bg-primary.text-white.mb-4
+              .card-body
+                h5 Total Employee
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
+          .col-xl-3.col-md-6
+            .card.bg-success.text-white.mb-4
+              .card-body
+                h5 In-Active Employee
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
+          .col-xl-3.col-md-6
+            .card.bg-warning.text-white.mb-4
+              .card-body
+                h5 Active Employee
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
+      .container-fluid.px-4
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Asset Details
+        .row
+          .col-xl-3.col-md-6
+            .card.bg-primary.text-white.mb-4
+              .card-body
+                h5 Total Asset
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
+          .col-xl-3.col-md-6
+            .card.bg-success.text-white.mb-4
+              .card-body
+                h5 Assets in werehouse
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
+          .col-xl-3.col-md-6
+            .card.bg-warning.text-white.mb-4
+              .card-body
+                h5 Assets in Employees
+              .card-footer.d-flex.align-items-center.justify-content-between
+                a.small.text-white.stretched-link(href='#') View Details
+                .small.text-white
+                  i.fas.fa-angle-right
