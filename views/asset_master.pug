@@ -1,10 +1,10 @@
 extends dashboard_layout
 
 block content
-  .container.mt-4
+  .container
     h1.text-center Asset Master
 
-    form(action='/asset_master', method='get')
+    form(action='/asset_master', method='get')#filterForm
       .row.mb-3
         .col-md-4
           label(for='assetCategory', class='form-label') Asset Category:
@@ -12,16 +12,21 @@ block content
             option(value='') All
             each category in assetCategories
               option(value=category.id)= category.name
-
         .col-md-4
           label(for='make', class='form-label') Make:
-          input.form-control(type='text', name='make', id='make')
-
+          select.form-select(name='make', id='make') 
+            option(value='') All
+            each make in makes 
+              option(value=make)= make
         .col-md-4
           label(for='model', class='form-label') Model:
-          input.form-control(type='text', name='model', id='model')
+          select.form-select(name='model', id='model') 
+            option(value='') All
+            each model in models 
+              option(value=model)= model
+      .mb-3
+        button.btn.btn-primary(type='submit')#filterSubmitButton Filter
 
-      button.btn.btn-primary(type='submit') Filter
 
     .modal.fade#addAssetModal(tabindex='-1', role='dialog', aria-labelledby='addAssetModalLabel', aria-hidden='true')
       .modal-dialog(role='document')
@@ -29,7 +34,7 @@ block content
           .modal-header
             h5#addAssetModalLabel.modal-title Add Asset
           .modal-body
-            form(action='/asset/add', method='POST')
+            form(action='/asset/add', method='POST')#addAssetForm
               .mb-3
                 label(for='addSerialNumber', class='form-label') Serial Number:
                 input.form-control(type='text', name='serialNumber', id='addSerialNumber', required=true)
@@ -65,7 +70,7 @@ block content
                 .modal-header
                   h5#editAssetModalLabel.modal-title Edit Asset - #{asset.serialNumber}
                 .modal-body
-                  form(action=`/asset/${asset.id}/edit`, method='post')
+                  form(action=`/asset/${asset.id}/edit`, method='post')#editAssetForm
                     .mb-3
                       label(for=`editSerialNumber-${asset.id}`, class='form-label') Serial Number:
                       input.form-control(type='text', name='serialNumber', id=`editSerialNumber-${asset.id}`, value=asset.serialNumber, required=true)
@@ -102,10 +107,13 @@ block content
             .modal-header
               h5#issueAssetModalLabel.modal-title Issue Asset - #{asset.serialNumber}
             .modal-body
-              form(action=`/asset/${asset.id}/issue`, method='post')
+              form(action=`/asset/${asset.id}/issue`, method='post')#issueAssetForm
                 .mb-3
                   label(for=`issueTo-${asset.id}`, class='form-label') Issue To:
-                  input.form-control(type='text', name='issuedTo', id=`issueTo-${asset.id}`, required=true)
+                  select.form-select(name='issuedTo' id=`issueTo-${asset.id}` required=true)
+                    option(value='' disabled selected) Select
+                    each users in user
+                      option(value=users.username)= users.username
 
                 .mb-3
                   label(for=`issueDate-${asset.id}`, class='form-label') Issue Date:
@@ -123,7 +131,7 @@ block content
             .modal-header
               h5#returnAssetModalLabel.modal-title Return Asset - #{asset.serialNumber}
             .modal-body
-              form(action=`/asset/${asset.id}/return`, method='post')
+              form(action=`/asset/${asset.id}/return`, method='post')#returnAssetForm
                 .mb-3
                   label(for=`returnDate-${asset.id}`, class='form-label') Return Date:
                   input.form-control(type='date', name='returnDate', id=`returnDate-${asset.id}`, required=true)
@@ -144,7 +152,7 @@ block content
             .modal-header
               h5#scrapAssetModalLabel.modal-title Scrap Asset - #{asset.serialNumber}
             .modal-body
-              form(action=`/asset/${asset.id}/scrap`, method='post')
+              form(action=`/asset/${asset.id}/scrap`, method='post')#scrapAssetForm
                 .mb-3
                   label(for=`scrapReason-${asset.id}`, class='form-label') Scrap Reason:
                   input.form-control(type='text', name='scrapReason', id=`scrapReason-${asset.id}`, required=true)
@@ -180,7 +188,7 @@ block content
             .modal-footer
               button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
 
-    table.table.table-bordered.table-hover.table-responsive-md
+    table#assetCategoryTable.table.table-bordered.table-hover.table-responsive-md
       thead
         tr
           th Serial Number
@@ -205,24 +213,26 @@ block content
               td= asset.returnDate
               td= asset.returnReason
               td
-                a.btn.btn-warning.btn-sm(href=`#editAssetModal-${asset.id}`, data-bs-toggle='modal') Edit
-
-                a.btn.btn-info.btn-sm(href=`#issueAssetModal-${asset.id}`, data-bs-toggle='modal') Issue
-
-                a.btn.btn-secondary.btn-sm(href=`#returnAssetModal-${asset.id}`, data-bs-toggle='modal') Return
-
-                a.btn.btn-danger.btn-sm(href=`#scrapAssetModal-${asset.id}`, data-bs-toggle='modal') Scrap
-
-                a.btn.btn-primary.btn-sm(href=`#assetHistoryModal-${asset.id}`, data-bs-toggle='modal') History
+                a.btn.btn-warning.btn-sm.m-1(href=`#editAssetModal-${asset.id}`, data-bs-toggle='modal') Edit
+                a.btn.btn-info.btn-sm.m-1(href=`#issueAssetModal-${asset.id}`, data-bs-toggle='modal') Issue
+                a.btn.btn-secondary.btn-sm.m-1(href=`#returnAssetModal-${asset.id}`, data-bs-toggle='modal') Return
+                a.btn.btn-danger.btn-sm.m-1(href=`#scrapAssetModal-${asset.id}`, data-bs-toggle='modal') Scrap
+                a.btn.btn-primary.btn-sm.m-1(href=`#assetHistoryModal-${asset.id}`, data-bs-toggle='modal') History
 
   script(src='https://code.jquery.com/jquery-3.6.0.min.js')
   script(src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js')
-  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')  // Include Bootstrap JS
+  link(rel='stylesheet', href='https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css') 
+  script(src='https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js') 
   script.
     $(document).ready(function() {
-      var table = $('#assetMasterTable').DataTable({
-        paging: false,
+      var table = $('#assetCategoryTable').DataTable({
+        paging: true,
         ordering: false,
         searching: true,
       });
+
+      $('#filterSubmitButton').click(function() {
+        $('#filterForm').submit();
+      });
+
     });

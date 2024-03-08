@@ -4,7 +4,7 @@ block content
   div.container.mt-5
     h1.text-center Asset Category Master
     a.btn.btn-success(href='#addAssetCategoryModal', data-bs-toggle='modal').my-3 Add Asset Category
-    table.table.table-bordered
+    table#assetCategoryTable.table.table-bordered
       thead
         tr
           th Name
@@ -46,17 +46,20 @@ block content
                 button.btn.btn-primary(type='submit') Save Changes  
           .modal-footer
             button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
-            
 
   script(src='https://code.jquery.com/jquery-3.6.0.min.js')
   script(src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js')
-  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')  // Include Bootstrap JS
+  link(rel='stylesheet', href='https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css') 
+  script(src='https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js') 
   script.
     $(document).ready(function() {
       var table = $('#assetCategoryTable').DataTable({
-        paging: false,
+        paging: true,
         ordering: false,
         searching: true,
       });
-    });
 
+      // Custom styling for pagination and search
+      //- $('#assetCategoryTable_paginate').addClass('pagination justify-content-end my-3');
+      //- $('#assetCategoryTable_filter').addClass('d-flex align-items-center');
+    });

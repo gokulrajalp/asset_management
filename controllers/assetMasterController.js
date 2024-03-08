@@ -6,9 +6,13 @@ const assetMasterController = {
       const assetCategories = await AssetCategory.findAll();
       
       const assetHistory = await AssetHistory.findAll();
+
+      const user = await User.findAll();
       
 
       const { assetCategory, make, model } = req.query;
+
+  
 
       const whereClause = {};
       if (assetCategory) {
@@ -16,11 +20,19 @@ const assetMasterController = {
       }
 
       if (make) {
-        whereClause.make = { [Op.like]: `%${make}%` };
+        const mak = make[0];
+        if(mak){
+
+          whereClause.make = { [Op.like]: `%${mak}%` };
+        }
       }
 
       if (model) {
-        whereClause.model = { [Op.like]: `%${model}%` };
+        const mod = model[0];
+        if(mod){
+
+          whereClause.model = { [Op.like]: `%${mod}%` };
+        }
       }
 
       const assets = await Asset.findAll({
@@ -28,7 +40,13 @@ const assetMasterController = {
         include: [{ model: AssetCategory }],
       });
 
-      res.render('asset_master', { assets, assetCategories, assetHistory });
+      const makesSet = new Set(assets.map(asset => asset.make));
+      const makes = Array.from(makesSet);
+
+      const modelsSet = new Set(assets.map(asset => asset.model));
+      const models = Array.from(modelsSet);
+
+      res.render('asset_master', { assets, assetCategories,makes, models, user, assetHistory });
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
