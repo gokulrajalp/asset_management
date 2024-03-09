@@ -1,6 +1,6 @@
 const employeeController = {
   renderEmployeeDashboard: (req, res) => {
-    res.render('employee');
+    res.render('layout');
   },
 
 };

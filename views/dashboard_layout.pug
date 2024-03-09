@@ -10,76 +10,71 @@ head
   script
       include ../Bootstrap/js/bootstrap.bundle.min.js
   script(src='https://use.fontawesome.com/releases/v6.3.0/js/all.js' crossorigin='anonymous')
-nav.sb-topnav.navbar.navbar-expand.navbar-dark.bg-dark
-  // Navbar Brand
-  a.navbar-brand.ps-3(href='index.html') Asset Management
-  // Sidebar Toggle
-  button#sidebarToggle.btn.btn-link.btn-sm.order-1.order-lg-0.me-4.me-lg-0(href='#!')
-    i.fas.fa-bars
-  // Navbar Search
-  form.d-none.d-md-inline-block.form-inline.ms-auto.me-0.me-md-3.my-2.my-md-0
-    .input-group
-      input.form-control(type='text' placeholder='Search for...' aria-label='Search for...' aria-describedby='btnNavbarSearch')
-      button#btnNavbarSearch.btn.btn-primary(type='button')
-        i.fas.fa-search
-  // Navbar
-  ul.navbar-nav.ms-auto.ms-md-0.me-3.me-lg-4
-    li.nav-item.dropdown
-      a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
-        i.fas.fa-user.fa-fw
-      ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
-        li
-          a.dropdown-item(href='#!') Settings
-        li
-          a.dropdown-item(href='#!') Activity Log
-        li
-          hr.dropdown-divider
-        li
-          a.dropdown-item(href='/logout') Logout
-#layoutSidenav
-  #layoutSidenav_nav
-    nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
-      .sb-sidenav-menu
-        .nav
-          .sb-sidenav-menu-heading Core
-          a.nav-link(href='/dashboard')
-            .sb-nav-link-icon
-              i.fas.fa-tachometer-alt
-            |                                 Dashboard
-          .sb-sidenav-menu-heading Interface
-          a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapseLayouts-Employee-master' aria-expanded='false' aria-controls='collapseLayouts')
-            .sb-nav-link-icon
-              i.fas.fa-columns
-            |                                 Employee Master
-            .sb-sidenav-collapse-arrow
-              i.fas.fa-angle-down
-          #collapseLayouts-Employee-master.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion')
-            nav.sb-sidenav-menu-nested.nav
-              a.nav-link(href='/employee_master') All Employee
-              a.nav-link(href='#addEmployeeModal', data-bs-toggle='modal') Add Employee
-          a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapseLayouts-Asset-Category-Master' aria-expanded='false' aria-controls='collapseLayouts')
-            .sb-nav-link-icon
-              i.fas.fa-columns
-            |                                 Asset Category Master
-            .sb-sidenav-collapse-arrow
-              i.fas.fa-angle-down
-          #collapseLayouts-Asset-Category-Master.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion')
-            nav.sb-sidenav-menu-nested.nav
-              a.nav-link(href='/asset_category_master') All Category
-              a.nav-link(href='#addAssetCategoryModal', data-bs-toggle='modal') Add Category
-          a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapseLayouts-Asset-Master' aria-expanded='false' aria-controls='collapseLayouts')
-            .sb-nav-link-icon
-              i.fas.fa-columns
-            |                                 Asset Master
-            .sb-sidenav-collapse-arrow
-              i.fas.fa-angle-down
-          #collapseLayouts-Asset-Master.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion')
-            nav.sb-sidenav-menu-nested.nav
-              a.nav-link(href='/asset_master') All Asset
-              a.nav-link(href='layout-static.html') Add Asset
-      .sb-sidenav-footer
-        .small Logged in as:
-        |                         Admin
-  #layoutSidenav_content
-    main
-      block content
+  script(src='https://code.jquery.com/jquery-3.6.4.min.js')
+  script(src='https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js', type='text/javascript')
+  link(href='https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css', rel='stylesheet', type='text/css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js')
+
+  script.
+    $(document).ready(function () {
+    $('#sidebarToggle').click(function () {
+      $('#layoutSidenav_nav').toggleClass('d-block d-none');
+    });
+    $('#datepicker').datepicker();
+    });
+body    
+  nav.sb-topnav.navbar.navbar-expand.navbar-dark.bg-dark
+    // Navbar Brand
+    a.navbar-brand.ps-3(href='index.html') Asset Management
+    // Sidebar Toggle
+    button#sidebarToggle.btn.btn-link.btn-sm.order-1.order-lg-0.me-4.me-lg-0(href='#!')
+      i.fas.fa-bars
+    // Navbar Search
+    form.d-none.d-md-inline-block.form-inline.ms-auto.me-0.me-md-3.my-2.my-md-0
+      .input-group
+        input.form-control(type='text' placeholder='Search for...' aria-label='Search for...' aria-describedby='btnNavbarSearch')
+        button#btnNavbarSearch.btn.btn-primary(type='button')
+          i.fas.fa-search
+    // Navbar
+    ul.navbar-nav.ms-auto.ms-md-0.me-3.me-lg-4
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+          i.fas.fa-user.fa-fw
+        ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+          li
+            a.dropdown-item(href='#!') Settings
+          li
+            a.dropdown-item(href='#!') Activity Log
+          li
+            hr.dropdown-divider
+          li
+            a.dropdown-item(href='/logout') Logout
+  #layoutSidenav
+    #layoutSidenav_nav
+      nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
+        .sb-sidenav-menu
+          .nav
+            .sb-sidenav-menu-heading Core
+            a.nav-link(href='/dashboard')
+              .sb-nav-link-icon
+                i.fas.fa-tachometer-alt
+              |                                 Dashboard
+            .sb-sidenav-menu-heading Interface
+            a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapseLayouts-Employee-master' aria-expanded='false' aria-controls='collapseLayouts')
+              .sb-nav-link-icon
+                i.fas.fa-columns
+              |                                 Master
+              .sb-sidenav-collapse-arrow
+                i.fas.fa-angle-down
+            #collapseLayouts-Employee-master.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion')
+              nav.sb-sidenav-menu-nested.nav
+                a.nav-link(href='/employee_master') Employee Master
+                a.nav-link(href='/asset_category_master') Asset Category Master
+                a.nav-link(href='/asset_master') Asset Master
+        .sb-sidenav-footer
+          .small Logged in as:
+          |                         Admin
+    #layoutSidenav_content
+       main
+         block content
