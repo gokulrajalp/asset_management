@@ -1,5 +1,7 @@
-const { User } = require('../models');
+const { Asset, Sequelize, User } = require('../models');
+const { Op } = Sequelize;
 const jwt = require('jsonwebtoken');
+
 
 
 const authController = {
@@ -7,10 +9,47 @@ const authController = {
     res.render('login', { error: null });
   },
 
+ 
+
+  renderdashboard: async (req, res) => {
+
+ const employeeCount = await User.count({
+    where: { role: 'employee' },
+  });
+
+  const inActiveEmployeeCount = await User.count({
+    where: { role: 'employee', activityStatus : 'inactive' },
+  });
+
+  const activeEmployeeCount = await User.count({
+    where: { role: 'employee', activityStatus : 'active' },
+  });
+
+  const totalAsset = await Asset.count();
+
+  const assetsInWereHouse = await Asset.count({
+    where: { issuedTo: null },
+  }); 
+  
+  const assetsInBranch = await Asset.count({
+    where: { issuedTo: {
+      [Sequelize.Op.not]: null,
+    }, },
+  });
 
 
-  renderdashboard: (req, res) => {
-    res.render('dashboard');
+  const dashboardInfo = {
+    employeeCount : employeeCount,
+    inActiveEmployeeCount : inActiveEmployeeCount,
+    activeEmployeeCount : activeEmployeeCount,
+    totalAsset : totalAsset,
+    assetsInWereHouse : assetsInWereHouse,
+    assetsInBranch : assetsInBranch,
+
+
+  }
+
+    res.render('dashboard', {dashboardInfo});
   },
 
 

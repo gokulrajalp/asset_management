@@ -4,30 +4,30 @@ block content
       .container-fluid.px-4
         h1.mt-4 Dashboard
         ol.breadcrumb.mb-4
-          li.breadcrumb-item.active Employee Details
+          li.breadcrumb-item.active Employees Details
         .row
           .col-xl-3.col-md-6
             .card.bg-primary.text-white.mb-4
               .card-body
-                h5 Total Employee
+                h5 Total Employees - #{dashboardInfo.employeeCount}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/employee_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
           .col-xl-3.col-md-6
             .card.bg-success.text-white.mb-4
               .card-body
-                h5 In-Active Employee
+                h5 Active Employees - #{dashboardInfo.activeEmployeeCount}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/employee_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
           .col-xl-3.col-md-6
             .card.bg-warning.text-white.mb-4
               .card-body
-                h5 Active Employee
+                h5 Inactive Employees -#{dashboardInfo.inActiveEmployeeCount}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/employee_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
       .container-fluid.px-4
@@ -37,24 +37,24 @@ block content
           .col-xl-3.col-md-6
             .card.bg-primary.text-white.mb-4
               .card-body
-                h5 Total Asset
+                h5 Total Asset - #{dashboardInfo.totalAsset}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/asset_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
           .col-xl-3.col-md-6
             .card.bg-success.text-white.mb-4
               .card-body
-                h5 Assets in werehouse
+                h5 Branch Total - #{dashboardInfo.assetsInBranch}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/asset_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
           .col-xl-3.col-md-6
             .card.bg-warning.text-white.mb-4
               .card-body
-                h5 Assets in Employees
+                h5 Warehouse Total - #{dashboardInfo.assetsInWereHouse}
               .card-footer.d-flex.align-items-center.justify-content-between
-                a.small.text-white.stretched-link(href='#') View Details
+                a.small.text-white.stretched-link(href='/asset_master') View Details
                 .small.text-white
                   i.fas.fa-angle-right
