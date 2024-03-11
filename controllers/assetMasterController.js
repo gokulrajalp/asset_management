@@ -65,12 +65,25 @@ const assetMasterController = {
 
   handleAddAsset: async (req, res) => {
     try {
-      const { serialNumber, make, model, purchaseDate, assetCategoryId } = req.body;
+      const { serialNumber, make, model, purchasedDate, assetCategoryId } = req.body;
+
+
+      const [month, day, year] = purchasedDate.split('/');
+
+
+      const DateOfPurchase = new Date(`${year}-${month}-${day}`);
+
+      // const DateOfPurchase = moment(purchaseDate, 'MM/DD/YY');
+
+      const DateString = DateOfPurchase.toISOString();
+
+  
+
       await Asset.create({
         serialNumber,
         make,
         model,
-        purchaseDate,
+        purchaseDate: DateString,
         assetCategoryId,
       });
       res.redirect('/asset_master');

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       scrapStatus: DataTypes.STRING,
       assetCategoryId: DataTypes.INTEGER,
       issuedTo: DataTypes.STRING,
+      purchaseDate: DataTypes.STRING,
     },
     {
       sequelize,
