@@ -15,13 +15,18 @@ html
   body
     header
       div.top-right-corner
-      form
-        .row.form-group
-          label.col-sm-1.col-form-label(for='date') Date
-          .col-sm-4
-            #datepicker.input-group.date
-              input.form-control(type='text')
-              span.input-group-append
-                span.input-group-text.bg-white.d-block
-                  i.fa.fa-calendar.my-2
-                  
+      form.m-4
+        .col
+          label.form-label(for='validationDefaultUsername') Username
+          .input-group
+            span#inputGroupPrepend2.input-group-text @
+            input#validationDefaultUsername.form-control(type='text' aria-describedby='inputGroupPrepend2' required='')
+        .col
+          label.form-label(for='validationDefaultUsername') Username
+          .input-group
+            span#inputGroupPrepend2.input-group-text @
+            input#validationDefaultUsername.form-control(type='text' aria-describedby='inputGroupPrepend2' required='')
+        .col.m-4
+          button.btn.btn-primary(type='submit') Submit form
+
+                        
